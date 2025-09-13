@@ -66,6 +66,7 @@ export const updateProject = asyncHandler(async (req, res) => {
   if (!project) return res.status(404).json({ message: 'Project not found' });
   if (!canManageProject(req.user, project)) return res.status(403).json({ message: 'Forbidden' });
 
+
   const updatable = ['title', 'description', 'startDate', 'endDate', 'status'];
   updatable.forEach(k => {
     if (req.body[k] !== undefined) project[k] = req.body[k];
@@ -120,4 +121,5 @@ export const addProjectDescription = asyncHandler(async (req, res) => {
     .populate('descriptions.author', 'name role')
     .lean();
   res.status(201).json(populated.descriptions.at(-1));
+
 });
