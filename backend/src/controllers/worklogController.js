@@ -34,4 +34,5 @@ export const listWorkLogs = asyncHandler(async (req, res) => {
     .sort({ createdAt: -1 })
     .lean();
   res.json(logs);
+
 });
